@@ -32,7 +32,6 @@ chrome.runtime.onMessage.addListener(
 	    		var fileReader = new FileReader();
 
 	            fileReader.onload = function (e) {
-	            	console.log("here!");
 	                var text = e.target.result;
 	                //do something with text
 	                data = CSVToArray( text, ',');
@@ -49,10 +48,9 @@ chrome.runtime.onMessage.addListener(
 	                		frame, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE).snapshotItem(0);
 
 	                	if (row) {
-	                		// console.log(datarow[0] + " " + datarow[1] + "/100 ." + datarow[2]);
-	                		row.children[3].innerHTML = "<div><input id=\"gbForm:gradingTable:0:Score\" name=\"gbForm:gradingTable:0:Score\" type=\"text\" value=\" " + datarow[1] + "\" size=\"6\" onkeypress=\"return submitOnEnter(event, 'gbForm:saveButton');\" style=\"text-align:right;\"></div>";
+	                		row.children[3].innerHTML = row.children[3].innerHTML.replace(/value="[0-9]*"/, "value=\"" + datarow[1] + "\"");
 	                		if (datarow.length >= 3) {
-                                row.children[4].innerHTML = "<div><textarea name=\"gbForm:gradingTable:0:Comment\" id=\"gbForm:gradingTable:0:Comment\" cols=\"35\" rows=\"4\">" + datarow[2] + "</textarea></div>";
+	                			row.children[4].innerHTML = row.children[4].innerHTML.replace(/rows="4">.*<\/textarea>/, "rows=\"4\">" + datarow[2] + "</textarea>");
 	                	    }
                         } else {
 	                		if (datarow[0] != "") {
