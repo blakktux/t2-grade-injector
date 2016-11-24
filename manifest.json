@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "T-Square Grade Injector",
-    "version": "0.13",
+    "version": "0.14",
 
     "permissions": [
         "*://t-square.gatech.edu/*"
